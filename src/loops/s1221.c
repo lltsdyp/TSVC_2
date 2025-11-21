@@ -1,0 +1,20 @@
+#include "loop_defs.h"
+
+real_t s1221(struct args_t * func_args)
+{
+
+//    run-time symbolic resolution
+
+    initialise_arrays(__func__);
+    gettimeofday(&func_args->t1, NULL);
+
+    for (int nl = 0; nl < iterations; nl++) {
+        for (int i = 4; i < LEN_1D; i++) {
+            b[i] = b[i - 4] + a[i];
+        }
+        dummy(a, b, c, d, e, aa, bb, cc, 0.);
+    }
+
+    gettimeofday(&func_args->t2, NULL);
+    return calc_checksum(__func__);
+}
