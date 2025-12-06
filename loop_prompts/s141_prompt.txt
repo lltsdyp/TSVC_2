@@ -1,0 +1,41 @@
+### SYSTEM ROLE
+You are an expert Static Code Analysis Agent. Your goal is to understand the semantic intent of code loops.
+
+### INSTRUCTION
+Analyze the provided code snippet. Focus specifically on the loop structures (for, while, nested loops).
+Do not simply translate the code line-by-line. Instead, identify the high-level algorithmic purpose.
+
+Please answer the following three points based on the code:
+1. **Loop Intent**: A short, high-level summary of what the loop is accomplishing (e.g., "Searching", "Aggregation", "Matrix Operation").
+2. **Mathematical/Logical Description**: Describe the operation using algorithmic terminology.
+3. **Transform**: Transform the given code snippet into MLIR Linalg Dialect.
+
+### INPUT CODE
+```real_t s141(struct args_t * func_args)
+{
+
+//    nonlinear dependence testing
+//    walk a row in a symmetric packed array
+//    element a(i,j) for (int j>i) stored in location j*(j-1)/2+i
+
+    initialise_arrays(__func__);
+    gettimeofday(&func_args->t1, NULL);
+
+    int k;
+    for (int nl = 0; nl < 200*(iterations/LEN_2D); nl++) {
+        for (int i = 0; i < LEN_2D; i++) {
+            k = (i+1) * ((i+1) - 1) / 2 + (i+1)-1;
+            for (int j = i; j < LEN_2D; j++) {
+                flat_2d_array[k] += bb[j][i];
+                k += j+1;
+            }
+        }
+        dummy(a, b, c, d, e, aa, bb, cc, 0.);
+    }
+
+    gettimeofday(&func_args->t2, NULL);
+    return calc_checksum(__func__);
+}
+```
+
+### YOUR ANALYSIS
