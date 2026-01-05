@@ -1,5 +1,13 @@
 #include "loop_defs.h"
 
+void s151s(real_t a[LEN_1D], real_t b[LEN_1D],  int m)
+{
+    for (int i = 0; i < LEN_1D-1; i++) {
+        a[i] = a[i + m] + b[i];
+    }
+}
+
+
 real_t s151(struct args_t * func_args)
 {
 
